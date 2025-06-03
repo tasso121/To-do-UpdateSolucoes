@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use App\Services\Interfaces\TaskServiceInterface;
-use App\Services\TaskService;
+use App\Services\Eloquent\TaskService;
 use App\Repositories\Eloquent\TaskRepository;
 
 class AppServiceProvider extends ServiceProvider
