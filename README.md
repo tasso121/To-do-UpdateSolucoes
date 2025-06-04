@@ -20,7 +20,7 @@ Aplicação desenvolvida em Laravel para gerenciamento de tarefas, como parte de
 - Laravel 12
 - PHP 8.3
 - Breeze (Blade + Auth)
-- MySQL ou SQLite
+- MySQL
 - Blade Templates
 
 ---
@@ -54,7 +54,7 @@ php artisan migrate --seed
 
 ### 6. Inicie o servidor
 
-php artisan serve
+php artisan serve  
 Acesse: http://localhost:8000
 
 👥 Usuários pré-cadastrados:
