@@ -55,8 +55,15 @@ class TaskController extends Controller
 
     public function destroy(int $id)
     {
+        $task = $this->taskService->getTask($id);
+
+        if ($task->trashed()) {
+            $this->taskService->forceDeleteTask($id);
+            return redirect()->route('tasks.trashed')->with('success', 'Tarefa apagada definitivamente.');
+        }
+
         $this->taskService->deleteTask($id);
-        return redirect()->route('tasks.index')->with('success', 'Tarefa deletada (soft) com sucesso.');
+        return redirect()->route('tasks.index')->with('success', 'Tarefa movida para a lixeira.');
     }
 
     public function restore(int $id)

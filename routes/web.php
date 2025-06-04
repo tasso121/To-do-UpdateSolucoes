@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('tasks/trashed', [TaskController::class, 'trashed'])->name('tasks.trashed');
+    Route::delete('tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
     Route::post('tasks/{id}/restore', [TaskController::class, 'restore'])->name('tasks.restore');
     Route::resource('tasks', TaskController::class);
 });

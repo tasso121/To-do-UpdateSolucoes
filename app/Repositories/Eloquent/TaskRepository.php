@@ -40,6 +40,13 @@ class TaskRepository implements TaskRepositoryInterface
         $task = $this->find($id);
         return $task->delete();
     }
+    
+    public function forceDelete(int $id)
+    {
+        $task = Task::withTrashed()->findOrFail($id);
+        return $task->forceDelete();
+    }
+
 
     public function restore(int $id)
     {

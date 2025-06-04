@@ -27,8 +27,8 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($tasks as $task)
-                <tr class="trashed-row">
+            @foreach($tasks as $task)
+                <tr>
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->status === 'pending' ? 'Pendente' : 'Concluída' }}</td>
                     <td>{{ $task->deleted_at->format('d/m/Y H:i') }}</td>
@@ -37,13 +37,19 @@
                             @csrf
                             <button type="submit" class="button">Restaurar</button>
                         </form>
+
+                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button
+                                type="submit"
+                                class="button button-danger"
+                                onclick="return confirm('Esta tarefa será apagada DEFINITIVAMENTE. Continuar?')"
+                            >Excluir Definitivamente</button>
+                        </form>
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="4">Não há tarefas apagadas.</td>
-                </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
 

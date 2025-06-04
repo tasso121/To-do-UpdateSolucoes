@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $task->title }}</td>
                     <td>{{ $task->status === 'pending' ? 'Pendente' : 'Concluída' }}</td>
-                    <td>{{ $task->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $task->created_at->timezone('America/Fortaleza')->format('d/m/Y H:i') }}</td>
                     <td>
                         <a href="{{ route('tasks.edit', $task->id) }}" class="button">Editar</a>
 
