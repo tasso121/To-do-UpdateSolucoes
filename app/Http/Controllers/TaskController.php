@@ -64,4 +64,12 @@ class TaskController extends Controller
         $this->taskService->restoreTask($id);
         return redirect()->route('tasks.index')->with('success', 'Tarefa restaurada com sucesso.');
     }
+    
+    public function trashed(Request $request)
+    {
+        $tasks = $this->taskService->listTrashedTasks($request->only('status'));
+        return view('tasks.trashed', compact('tasks'));
+    }
+
+
 }

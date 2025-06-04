@@ -1,9 +1,9 @@
 @if(session('success'))
-    <div style="color: green;">{{ session('success') }}</div>
+    <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
 @if($errors->any())
-    <div style="color: red;">
+    <div class="alert alert-error">
         <ul>
             @foreach($errors->all() as $erro)
                 <li>{{ $erro }}</li>

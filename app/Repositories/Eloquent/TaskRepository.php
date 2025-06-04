@@ -46,4 +46,17 @@ class TaskRepository implements TaskRepositoryInterface
         $task = Task::onlyTrashed()->findOrFail($id);
         return $task->restore();
     }
+    
+    public function trashed(array $filters = [])
+    {
+        $query = Task::onlyTrashed();
+
+        if (isset($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
+
+        return $query
+            ->orderByDesc('deleted_at')
+            ->paginate(10);
+    }
 }

@@ -10,4 +10,5 @@ interface TaskServiceInterface
     public function updateTask(int $id, array $data);
     public function deleteTask(int $id);
     public function restoreTask(int $id);
+    public function listTrashedTasks(array $filters = []);
 }

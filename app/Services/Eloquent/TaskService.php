@@ -43,4 +43,9 @@ class TaskService implements TaskServiceInterface
     {
         return $this->taskRepository->restore($id);
     }
+    
+    public function listTrashedTasks(array $filters = [])
+    {
+        return $this->taskRepository->trashed($filters);
+    }
 }
