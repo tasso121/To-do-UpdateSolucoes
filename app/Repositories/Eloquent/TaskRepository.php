@@ -9,7 +9,7 @@ class TaskRepository implements TaskRepositoryInterface
 {
     public function all(array $filters = [])
     {
-        $query = Task::query();
+        $query = Task::where('user_id', auth()->id());
 
         if (isset($filters['status'])) {
             $query->where('status', $filters['status']);
@@ -20,11 +20,15 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function find(int $id)
     {
-        return Task::withTrashed()->findOrFail($id);
+        return Task::withTrashed()
+            ->where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
     }
 
     public function create(array $data)
     {
+        $data['user_id'] = auth()->id(); 
         return Task::create($data);
     }
 
@@ -40,30 +44,37 @@ class TaskRepository implements TaskRepositoryInterface
         $task = $this->find($id);
         return $task->delete();
     }
-    
+
     public function forceDelete(int $id)
     {
-        $task = Task::withTrashed()->findOrFail($id);
+        $task = Task::withTrashed()
+            ->where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
         return $task->forceDelete();
     }
 
-
     public function restore(int $id)
     {
-        $task = Task::onlyTrashed()->findOrFail($id);
+        $task = Task::onlyTrashed()
+            ->where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
         return $task->restore();
     }
-    
+
     public function trashed(array $filters = [])
     {
-        $query = Task::onlyTrashed();
+        $query = Task::onlyTrashed()
+            ->where('user_id', auth()->id());
 
         if (isset($filters['status'])) {
             $query->where('status', $filters['status']);
         }
 
-        return $query
-            ->orderByDesc('deleted_at')
-            ->paginate(10);
+        return $query->orderByDesc('deleted_at')->paginate(10);
     }
 }
+

@@ -4,6 +4,17 @@ Aplicação desenvolvida em Laravel para gerenciamento de tarefas, como parte de
 
 ---
 
+## ✨ Funcionalidades
+
+- Cadastro de tarefas com título, descrição e status
+- Listagem paginada com filtro por status
+- Edição e exclusão com soft delete
+- Restauração de tarefas excluídas
+- Cada usuário vê apenas suas próprias tarefas
+- Autenticação com Laravel Breeze
+
+---
+
 ## 🧱 Tecnologias Utilizadas
 
 - Laravel 12
@@ -35,7 +46,7 @@ npm install && npm run build
 cp .env.example .env
 php artisan key:generate
 
-Edite o .env com os dados do seu banco (MySQL ou SQLite).
+Edite o .env com os dados do seu banco (MySQL).
 
 ### 5. Execute as migrations e seeders
 
@@ -44,11 +55,12 @@ php artisan migrate --seed
 ### 6. Inicie o servidor
 
 php artisan serve
-
 Acesse: http://localhost:8000
-👥 Usuários pré-cadastrados
-Email	Senha
-teste1@exemplo.com	senha123
-teste2@exemplo.com	senha123
+
+👥 Usuários pré-cadastrados:
+
+- Email: teste1@exemplo.com — Senha: senha123  
+- Email: teste2@exemplo.com — Senha: senha123
+
 
 Você também pode se cadastrar via /register.
